@@ -1,0 +1,13 @@
+name: Y4T CICD workflow
+
+
+on: [push]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+          -  name: Checkout code
+             uses: actions/checkout@v2
+          -  name: We are testing this workflow
+             run: echo Hello people, this is a test workflow for Y4T CICD!

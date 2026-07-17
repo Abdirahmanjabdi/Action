@@ -1,0 +1,16 @@
+# key value pairs
+name: John Doe
+age: 30
+city : New York
+
+# list
+hobbies:
+  - reading
+  - traveling
+  - swimming
+
+  #nested elements
+address:
+  street: 123 Main St
+  city: New York
+  state: NY

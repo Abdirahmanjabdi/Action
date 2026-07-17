@@ -1,13 +1,27 @@
-name: Y4T CICD workflow
-
-
+name: Y4t CI/CD workflow for matrix project
 on: [push]
-
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-          -  name: Checkout code
-             uses: actions/checkout@v2
-          -  name: We are testing this workflow
-             run: echo Hello people, this is a test workflow for Y4T CICD!
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+            cd matrix
+            pip install -r requirements.txt
+            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run tests
+        run: |
+            cd matrix
+            python -m unittest discover 
+      - name: notify success
+        if: success()
+        run: echo "All tests passed on python ${{ matrix.python-version }} successfully!"  

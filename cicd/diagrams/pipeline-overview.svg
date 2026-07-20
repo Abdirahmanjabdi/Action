@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <linearGradient id="gTf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9B5DE5"/><stop offset="1" stop-color="#7B42BC"/></linearGradient>
+    <linearGradient id="gDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3BA3F0"/><stop offset="1" stop-color="#2496ED"/></linearGradient>
+  </defs>
+
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <text x="640" y="42" text-anchor="middle" font-size="26" font-weight="700" fill="#1F2328">CI/CD pipelines - GitHub Actions</text>
+  <text x="640" y="68" text-anchor="middle" font-size="13.5" fill="#656D76">A single push to main fans out into two independent workflows: one gates the code, one ships the image.</text>
+
+  <!-- Trigger -->
+  <rect x="48" y="300" width="196" height="118" rx="8" fill="#1F2328"/>
+  <text x="146" y="338" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">git push</text>
+  <text x="146" y="360" text-anchor="middle" font-size="13" fill="#B9C0C8">branch: main</text>
+  <text x="146" y="388" text-anchor="middle" font-size="12" fill="#8B949E">commit e9fcb04</text>
+  <text x="146" y="405" text-anchor="middle" font-size="12" fill="#8B949E">triggers both workflows</text>
+
+  <line x1="244" y1="330" x2="300" y2="228" stroke="#7B42BC" stroke-width="2.4"/>
+  <polygon points="302,225 291,229 297,236" fill="#7B42BC"/>
+  <line x1="244" y1="388" x2="300" y2="490" stroke="#2496ED" stroke-width="2.4"/>
+  <polygon points="302,493 297,482 291,489" fill="#2496ED"/>
+
+  <!-- GitHub Actions boundary -->
+  <rect x="286" y="120" width="960" height="560" rx="10" fill="none" stroke="#D0D7DE" stroke-width="1.6" stroke-dasharray="6 5"/>
+  <text x="304" y="146" font-size="13" font-weight="600" fill="#656D76">GitHub Actions  ·  runner: ubuntu-latest</text>
+
+  <!-- ============ Lane 1: CI ============ -->
+  <rect x="306" y="166" width="922" height="180" rx="8" fill="#F7F4FD" stroke="#7B42BC" stroke-width="1.6"/>
+  <rect x="306" y="166" width="922" height="34" rx="8" fill="#7B42BC"/>
+  <text x="322" y="189" font-size="14" font-weight="700" fill="#ffffff">Task 1  ·  CI  ·  task-1-ci.yml  ·  Terraform linting and validation</text>
+
+  <g font-size="12.5" fill="#1F2328">
+    <rect x="326" y="222" width="150" height="66" rx="6" fill="#ffffff" stroke="#D0D7DE"/>
+    <text x="401" y="248" text-anchor="middle" font-weight="600">Checkout</text>
+    <text x="401" y="268" text-anchor="middle" font-size="11.5" fill="#656D76">actions/checkout</text>
+
+    <rect x="502" y="222" width="150" height="66" rx="6" fill="#ffffff" stroke="#D0D7DE"/>
+    <text x="577" y="248" text-anchor="middle" font-weight="600">Setup Terraform</text>
+    <text x="577" y="268" text-anchor="middle" font-size="11.5" fill="#656D76">v1.5.7</text>
+
+    <rect x="678" y="222" width="150" height="66" rx="6" fill="#ffffff" stroke="#D0D7DE"/>
+    <text x="753" y="248" text-anchor="middle" font-weight="600">init</text>
+    <text x="753" y="268" text-anchor="middle" font-size="11.5" fill="#656D76">-backend=false</text>
+
+    <rect x="854" y="222" width="150" height="66" rx="6" fill="#ffffff" stroke="#D0D7DE"/>
+    <text x="929" y="248" text-anchor="middle" font-weight="600">validate</text>
+    <text x="929" y="268" text-anchor="middle" font-size="11.5" fill="#656D76">syntax + types</text>
+
+    <rect x="1030" y="222" width="150" height="66" rx="6" fill="#ffffff" stroke="#D0D7DE"/>
+    <text x="1105" y="248" text-anchor="middle" font-weight="600">fmt -check</text>
+    <text x="1105" y="268" text-anchor="middle" font-size="11.5" fill="#656D76">formatting gate</text>
+  </g>
+  <g stroke="#7B42BC" stroke-width="2" fill="#7B42BC">
+    <line x1="476" y1="255" x2="496" y2="255"/><polygon points="502,255 493,251 493,259"/>
+    <line x1="652" y1="255" x2="672" y2="255"/><polygon points="678,255 669,251 669,259"/>
+    <line x1="828" y1="255" x2="848" y2="255"/><polygon points="854,255 845,251 845,259"/>
+    <line x1="1004" y1="255" x2="1024" y2="255"/><polygon points="1030,255 1021,251 1021,259"/>
+  </g>
+  <text x="326" y="316" font-size="12" fill="#656D76">Runs with no cloud credentials. Any unformatted or invalid config fails the build (continue-on-error: false).</text>
+
+  <!-- ============ Lane 2: CD ============ -->
+  <rect x="306" y="430" width="922" height="180" rx="8" fill="#F1F8FE" stroke="#2496ED" stroke-width="1.6"/>
+  <rect x="306" y="430" width="922" height="34" rx="8" fill="#2496ED"/>
+  <text x="322" y="453" font-size="14" font-weight="700" fill="#ffffff">Task 2  ·  CD  ·  task-2-cd.yaml  ·  Build and push image to DockerHub</text>
+
+  <g font-size="12.5" fill="#1F2328">
+    <rect x="326" y="486" width="150" height="66" rx="6" fill="#ffffff" stroke="#D0D7DE"/>
+    <text x="401" y="512" text-anchor="middle" font-weight="600">Checkout</text>
+    <text x="401" y="532" text-anchor="middle" font-size="11.5" fill="#656D76">actions/checkout</text>
+
+    <rect x="502" y="486" width="150" height="66" rx="6" fill="#ffffff" stroke="#D0D7DE"/>
+    <text x="577" y="506" text-anchor="middle" font-weight="600">DockerHub login</text>
+    <text x="577" y="524" text-anchor="middle" font-size="11.5" fill="#656D76">secrets, masked</text>
+    <text x="577" y="541" text-anchor="middle" font-size="11.5" fill="#656D76">in logs</text>
+
+    <rect x="678" y="486" width="150" height="66" rx="6" fill="#ffffff" stroke="#D0D7DE"/>
+    <text x="753" y="512" text-anchor="middle" font-weight="600">docker build</text>
+    <text x="753" y="532" text-anchor="middle" font-size="11.5" fill="#656D76">-f Dockerfile .</text>
+
+    <rect x="854" y="486" width="150" height="66" rx="6" fill="#ffffff" stroke="#D0D7DE"/>
+    <text x="929" y="512" text-anchor="middle" font-weight="600">docker push</text>
+    <text x="929" y="532" text-anchor="middle" font-size="11.5" fill="#656D76">tag = short SHA</text>
+
+    <rect x="1030" y="486" width="150" height="66" rx="6" fill="#EAF7EE" stroke="#2DA44E"/>
+    <text x="1105" y="512" text-anchor="middle" font-weight="600" fill="#1A7F37">DockerHub</text>
+    <text x="1105" y="532" text-anchor="middle" font-size="11.5" fill="#1A7F37">image published</text>
+  </g>
+  <g stroke="#2496ED" stroke-width="2" fill="#2496ED">
+    <line x1="476" y1="519" x2="496" y2="519"/><polygon points="502,519 493,515 493,523"/>
+    <line x1="652" y1="519" x2="672" y2="519"/><polygon points="678,519 669,515 669,523"/>
+    <line x1="828" y1="519" x2="848" y2="519"/><polygon points="854,519 845,515 845,523"/>
+    <line x1="1004" y1="519" x2="1024" y2="519"/><polygon points="1030,519 1021,515 1021,523"/>
+  </g>
+  <text x="326" y="580" font-size="12" fill="#656D76">Result: hollowy4t/action:e9fcb04 - an immutable tag that maps the running image back to the exact commit.</text>
+
+  <text x="640" y="702" text-anchor="middle" font-size="12.5" fill="#8B949E">CI protects the codebase. CD produces a traceable artefact. Both run on every push, independently of each other.</text>
+</svg>

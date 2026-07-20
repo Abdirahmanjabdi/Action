@@ -1,4 +1,0 @@
-# Drop pipeline screenshots here.
-# Passing:  01-ci-terraform-passing.png, 02-cd-docker-push-passing.png, 03-dockerhub-image.png
-# Failures: 04-issue-invalid-tag.png, 05-issue-module-not-found.png,
-#           06-issue-unittest-requirement.png, 07-issue-python-version.png

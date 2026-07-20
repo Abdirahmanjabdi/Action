@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" font-family="Arial, Helvetica, sans-serif">
+  <rect width="1280" height="760" fill="#ffffff"/>
+  <text x="640" y="42" text-anchor="middle" font-size="26" font-weight="700" fill="#1F2328">Pipeline failures I debugged</text>
+  <text x="640" y="68" text-anchor="middle" font-size="13.5" fill="#656D76">Four red builds, four unrelated causes. Every one was a lesson about how CI actually behaves, not about YAML syntax.</text>
+
+  <!-- column headers -->
+  <text x="66" y="112" font-size="13" font-weight="700" fill="#656D76">FAILURE</text>
+  <text x="500" y="112" font-size="13" font-weight="700" fill="#656D76">ROOT CAUSE</text>
+  <text x="900" y="112" font-size="13" font-weight="700" fill="#656D76">FIX</text>
+  <line x1="56" y1="124" x2="1224" y2="124" stroke="#D0D7DE" stroke-width="1.4"/>
+
+  <!-- ================= Row 1 ================= -->
+  <rect x="56" y="142" width="404" height="118" rx="7" fill="#FFF3F2" stroke="#D1242F" stroke-width="1.4"/>
+  <text x="72" y="168" font-size="12" font-weight="700" fill="#D1242F">Task 2 - Docker build</text>
+  <text x="72" y="194" font-size="12.5" fill="#1F2328" font-family="Consolas, monospace">invalid tag "/Action:e9fcb04":</text>
+  <text x="72" y="213" font-size="12.5" fill="#1F2328" font-family="Consolas, monospace">invalid reference format</text>
+  <text x="72" y="240" font-size="11.5" fill="#656D76">Build died before it started.</text>
+
+  <text x="480" y="176" font-size="12.5" fill="#1F2328">Two faults at once. The registry</text>
+  <text x="480" y="196" font-size="12.5" fill="#1F2328">variable resolved to an empty string,</text>
+  <text x="480" y="216" font-size="12.5" fill="#1F2328">leaving a leading slash. And Docker</text>
+  <text x="480" y="236" font-size="12.5" fill="#1F2328">repo names must be lowercase, so</text>
+  <text x="480" y="256" font-size="12.5" fill="#1F2328">capital "Action" was invalid anyway.</text>
+
+  <rect x="880" y="142" width="344" height="118" rx="7" fill="#EAF7EE" stroke="#2DA44E" stroke-width="1.4"/>
+  <text x="896" y="172" font-size="12" fill="#1A7F37" font-family="Consolas, monospace">registery="hollowy4t"</text>
+  <text x="896" y="194" font-size="12" fill="#1A7F37" font-family="Consolas, monospace">tag="${registery}/action:${sha}"</text>
+  <text x="896" y="226" font-size="11.5" fill="#656D76">An unset variable does not error,</text>
+  <text x="896" y="244" font-size="11.5" fill="#656D76">it silently corrupts the string.</text>
+
+  <!-- ================= Row 2 ================= -->
+  <rect x="56" y="292" width="404" height="118" rx="7" fill="#FFF3F2" stroke="#D1242F" stroke-width="1.4"/>
+  <text x="72" y="318" font-size="12" font-weight="700" fill="#D1242F">Install dependencies</text>
+  <text x="72" y="344" font-size="12.5" fill="#1F2328" font-family="Consolas, monospace">No matching distribution</text>
+  <text x="72" y="363" font-size="12.5" fill="#1F2328" font-family="Consolas, monospace">found for unittest</text>
+  <text x="72" y="390" font-size="11.5" fill="#656D76">pip refused to install.</text>
+
+  <text x="480" y="336" font-size="12.5" fill="#1F2328">unittest ships with Python. It is part</text>
+  <text x="480" y="356" font-size="12.5" fill="#1F2328">of the standard library, not a PyPI</text>
+  <text x="480" y="376" font-size="12.5" fill="#1F2328">package, so there is nothing for pip</text>
+  <text x="480" y="396" font-size="12.5" fill="#1F2328">to download and it fails hard.</text>
+
+  <rect x="880" y="292" width="344" height="118" rx="7" fill="#EAF7EE" stroke="#2DA44E" stroke-width="1.4"/>
+  <text x="896" y="326" font-size="12.5" fill="#1A7F37">Removed it from requirements.txt</text>
+  <text x="896" y="358" font-size="11.5" fill="#656D76">Requirements files are for</text>
+  <text x="896" y="376" font-size="11.5" fill="#656D76">third-party packages only. Anything</text>
+  <text x="896" y="394" font-size="11.5" fill="#656D76">bundled with the language breaks it.</text>
+
+  <!-- ================= Row 3 ================= -->
+  <rect x="56" y="442" width="404" height="118" rx="7" fill="#FFF3F2" stroke="#D1242F" stroke-width="1.4"/>
+  <text x="72" y="468" font-size="12" font-weight="700" fill="#D1242F">Run tests</text>
+  <text x="72" y="494" font-size="12.5" fill="#1F2328" font-family="Consolas, monospace">ModuleNotFoundError:</text>
+  <text x="72" y="513" font-size="12.5" fill="#1F2328" font-family="Consolas, monospace">No module named 'matrix'</text>
+  <text x="72" y="540" font-size="11.5" fill="#656D76">Tests could not import the code.</text>
+
+  <text x="480" y="486" font-size="12.5" fill="#1F2328">The step ran cd into the package</text>
+  <text x="480" y="506" font-size="12.5" fill="#1F2328">folder first, so the repository root</text>
+  <text x="480" y="526" font-size="12.5" fill="#1F2328">was never on sys.path and the import</text>
+  <text x="480" y="546" font-size="12.5" fill="#1F2328">could not resolve.</text>
+
+  <rect x="880" y="442" width="344" height="118" rx="7" fill="#EAF7EE" stroke="#2DA44E" stroke-width="1.4"/>
+  <text x="896" y="472" font-size="12" fill="#1A7F37" font-family="Consolas, monospace">unittest discover -s pkg -t .</text>
+  <text x="896" y="500" font-size="11.5" fill="#656D76">Added __init__.py and ran from the</text>
+  <text x="896" y="518" font-size="11.5" fill="#656D76">repo root. cd inside a CI step</text>
+  <text x="896" y="536" font-size="11.5" fill="#656D76">silently changes import resolution.</text>
+
+  <!-- ================= Row 4 ================= -->
+  <rect x="56" y="592" width="404" height="118" rx="7" fill="#FFF3F2" stroke="#D1242F" stroke-width="1.4"/>
+  <text x="72" y="618" font-size="12" font-weight="700" fill="#D1242F">Build matrix</text>
+  <text x="72" y="644" font-size="12.5" fill="#1F2328" font-family="Consolas, monospace">python-version: 3.10</text>
+  <text x="72" y="663" font-size="12.5" fill="#1F2328" font-family="Consolas, monospace">resolved as 3.1</text>
+  <text x="72" y="690" font-size="11.5" fill="#656D76">Runner installed the wrong runtime.</text>
+
+  <text x="480" y="636" font-size="12.5" fill="#1F2328">YAML parsed the unquoted 3.10 as a</text>
+  <text x="480" y="656" font-size="12.5" fill="#1F2328">number, and a trailing zero on a float</text>
+  <text x="480" y="676" font-size="12.5" fill="#1F2328">carries no meaning, so it collapsed</text>
+  <text x="480" y="696" font-size="12.5" fill="#1F2328">to 3.1.</text>
+
+  <rect x="880" y="592" width="344" height="118" rx="7" fill="#EAF7EE" stroke="#2DA44E" stroke-width="1.4"/>
+  <text x="896" y="622" font-size="12" fill="#1A7F37" font-family="Consolas, monospace">python-version: [ "3.10" ]</text>
+  <text x="896" y="650" font-size="11.5" fill="#656D76">Quote version numbers so YAML</text>
+  <text x="896" y="668" font-size="11.5" fill="#656D76">keeps them as strings. Same trap</text>
+  <text x="896" y="686" font-size="11.5" fill="#656D76">applies to yes / no / on / off.</text>
+
+  <!-- arrows -->
+  <g fill="#8B949E">
+    <polygon points="468,201 456,195 456,207"/><polygon points="872,201 860,195 860,207"/>
+    <polygon points="468,351 456,345 456,357"/><polygon points="872,351 860,345 860,357"/>
+    <polygon points="468,501 456,495 456,507"/><polygon points="872,501 860,495 860,507"/>
+    <polygon points="468,651 456,645 456,657"/><polygon points="872,651 860,645 860,657"/>
+  </g>
+</svg>

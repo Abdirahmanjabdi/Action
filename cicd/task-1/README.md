@@ -34,9 +34,7 @@ locals {
 Replace it with real Terraform when there is infrastructure to manage; the
 pipeline needs no changes to start validating it.
 
-## Known gap
+## Related
 
-The brief for Task 1 also lists **unit tests**. The Python tests in
-[`matrix/`](../../matrix) are written and importable, but no workflow currently
-executes them because this CI workflow was replaced by the Terraform job. See
-the improvements list in the [module README](../README.md#improvements-i-would-make-next).
+See the [module README](../README.md) for the pipeline diagrams, the failures I
+debugged, and what I would improve next.

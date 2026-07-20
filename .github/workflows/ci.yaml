@@ -19,7 +19,7 @@ jobs:
         run: |
          registery="hollowy4t"
          sha=$(git rev-parse --short HEAD)
-         primary_tag="${registery}/Action:${sha}"
+         primary_tag="${registery}/action:${sha}"
          docker build -t $primary_tag -f Dockerfile .
          docker push $primary_tag   
       

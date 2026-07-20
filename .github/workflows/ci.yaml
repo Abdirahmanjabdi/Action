@@ -20,8 +20,8 @@ jobs:
             if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Run tests
         run: |
-            cd matrix
-            python -m unittest discover 
+            # Run discovery from the repo root so `matrix` is importable as a package
+            python -m unittest discover -s matrix -p "test_*.py"
       - name: notify success
         if: success()
         run: echo "All tests passed on python ${{ matrix.python-version }} successfully!"  
